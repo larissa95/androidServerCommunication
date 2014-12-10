@@ -92,15 +92,21 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
         //set additional information like this => probably better in a own method for general use
-        /*List<NameValuePair> post= new ArrayList<NameValuePair>();
+        
+        List<NameValuePair> post= new ArrayList<NameValuePair>();
         post.add(new BasicNameValuePair("lastName", "User"));
+        post.add(new BasicNameValuePair("name", "test"));
         post.setEntity(new UrlEncodedFormEntity(post));
-        */
-        //other idea hand JSON within url[2] for this information, e.g jsonString
+        
+        
+        //other idea hand JSON within url[2] for this information, e.g jsonString, see last idea
+        
         //alternative, post whole dictionary at once
         // also very interesting: Gson Java library (can convert Java Objects into their JSON representation or jsonString ot an equivalent Java object.
         //String json = new GsonBuilder().create().toJson(comment, Map.class);
-        try{
+        
+        //another option:
+        /*try{
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("name", "test");
             jsonObject.put("lastName", "Wabu");
@@ -112,6 +118,7 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
         }catch(Exception e){
             e.printStackTrace();
         }
+         */
 
 
         return client.execute(post);
