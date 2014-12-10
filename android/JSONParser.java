@@ -54,6 +54,10 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
             httpResponse = GETResponse(transfer[0]);
             }else if(transfer[1].equals("POST")){
             httpResponse = POSTResponse(transfer[0]);
+            }else if(transfer[1].equals("PUT")){
+                Log.d("LogLari","TODO");
+            }else if(transfer[1].equals("DELETE")){
+                Log.d("LogLari","TODO");
             }
              // if message entity exits => get it here => in our example feedback json
             HttpEntity httpEntity = httpResponse.getEntity();
