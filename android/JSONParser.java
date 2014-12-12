@@ -8,6 +8,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -57,7 +58,7 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
             }else if(transfer[1].equals("PUT")){
                 Log.d("LogLari","TODO");
             }else if(transfer[1].equals("DELETE")){
-                Log.d("LogLari","TODO");
+            httpResponse = DELETEResponse(transfer[0]);
             }
              // if message entity exits => get it here => in our example feedback json
             HttpEntity httpEntity = httpResponse.getEntity();
@@ -97,10 +98,10 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
         HttpPost post = new HttpPost(url);
         //set additional information like this => probably better in a own method for general use
         
-        List<NameValuePair> post= new ArrayList<NameValuePair>();
-        post.add(new BasicNameValuePair("lastName", "User"));
-        post.add(new BasicNameValuePair("name", "test"));
-        post.setEntity(new UrlEncodedFormEntity(post));
+        List<NameValuePair> postContent= new ArrayList<NameValuePair>();
+        postContent.add(new BasicNameValuePair("lastName", "User"));
+        postContent.add(new BasicNameValuePair("name", "test"));
+        post.setEntity(new UrlEncodedFormEntity(postContent));
         
         
         //other idea hand JSON within url[2] for this information, e.g jsonString, see last idea
@@ -126,6 +127,13 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
 
 
         return client.execute(post);
+    }
+
+
+    private HttpResponse DELETEResponse(String url) throws IOException {
+        HttpDelete httpDelete = new HttpDelete(url);
+        DefaultHttpClient httpClient = new DefaultHttpClient();
+        return httpClient.execute(httpDelete);
     }
 
 }

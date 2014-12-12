@@ -23,8 +23,8 @@ public class test_activity extends ActionBarActivity {
             Log.d("LogsLar", jObj.toString());
                 try {
                     //to get the values for keys
-                    Log.d("LogsLar", jObj.getString("get"));
-                    Log.d("LogsLar", jObj.getString("hi"));
+                   // Log.d("LogsLar", jObj.getString("get"));
+                   // Log.d("LogsLar", jObj.getString("hi"));
                 }catch(Exception e){
 
                 }
@@ -35,9 +35,11 @@ public class test_activity extends ActionBarActivity {
             }
         };
         //if you are working with the python test server, run it and put your IP address here
-        //with transfer parameter : PUT, POST, GET
-        String transfer[] = {"http://100.71.3.186:5000/test/post","POST"};
+        //with transfer parameter : PUT, POST, GET, DELETE
+        //String transfer[] = {"http://141.58.32.219:5000/test/post","POST"};
+        String transfer[] = {"http://141.58.32.219:5000/test/delete","DELETE"};
         json.execute(transfer);
+
     }
 
 
