@@ -6,8 +6,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class test_activity extends ActionBarActivity {
@@ -32,13 +38,37 @@ public class test_activity extends ActionBarActivity {
             @Override
             public void JSONNotLoaded() {
             Log.d("LogsLar","JSONNotLoaded");
+
+            }
+            //only override if POST oder PUT
+            protected UrlEncodedFormEntity getUploadContent() throws Exception{
+                List<NameValuePair> postContent= new ArrayList<NameValuePair>();
+                postContent.add(new BasicNameValuePair("lastName", "Quappi"));
+                postContent.add(new BasicNameValuePair("name", "test"));
+                return new UrlEncodedFormEntity(postContent);
             }
         };
         //if you are working with the python test server, run it and put your IP address here
         //with transfer parameter : PUT, POST, GET, DELETE
-        //String transfer[] = {"http://141.58.32.219:5000/test/post","POST"};
-        String transfer[] = {"http://141.58.32.219:5000/test/delete","DELETE"};
+        String transfer[] = {"http://169.254.197.239:5000/test/post","POST"};
         json.execute(transfer);
+
+
+        //example for Delete
+        JSONParser jsonParser2 = new JSONParser() {
+            @Override
+            public void onJSONLoaded(JSONObject jObj) {
+                Log.d("LogsLar", jObj.toString());
+            }
+
+            @Override
+            public void JSONNotLoaded() {
+
+            }
+        };
+        String transfer1[] = {"http://169.254.197.239:5000/test/delete","DELETE"};
+        jsonParser2.execute(transfer1);
+
 
     }
 

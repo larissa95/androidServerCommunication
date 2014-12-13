@@ -1,5 +1,6 @@
 package project.server;
 
+import android.content.Entity;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -42,6 +43,7 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
             onJSONLoaded(jObj);
         }
     }
+
     //abstract methods to be implemented in sublcass
     public abstract void onJSONLoaded(JSONObject jObj);
     public abstract void JSONNotLoaded();
@@ -93,19 +95,15 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
         return httpClient.execute(httpGet);
     }
 
-    private HttpResponse POSTResponse(String url) throws IOException{
+    private HttpResponse POSTResponse(String url) throws Exception{
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
-        //set additional information like this => probably better in a own method for general use
-        
-        List<NameValuePair> postContent= new ArrayList<NameValuePair>();
-        postContent.add(new BasicNameValuePair("lastName", "User"));
-        postContent.add(new BasicNameValuePair("name", "test"));
-        post.setEntity(new UrlEncodedFormEntity(postContent));
-        
-        
+        UrlEncodedFormEntity entity = getUploadContent();
+        if(entity != null) {
+            post.setEntity(entity);
+        }
+
         //other idea hand JSON within url[2] for this information, e.g jsonString, see last idea
-        
         //alternative, post whole dictionary at once
         // also very interesting: Gson Java library (can convert Java Objects into their JSON representation or jsonString ot an equivalent Java object.
         //String json = new GsonBuilder().create().toJson(comment, Map.class);
@@ -129,11 +127,15 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
         return client.execute(post);
     }
 
-
     private HttpResponse DELETEResponse(String url) throws IOException {
         HttpDelete httpDelete = new HttpDelete(url);
         DefaultHttpClient httpClient = new DefaultHttpClient();
         return httpClient.execute(httpDelete);
+    }
+    //Override this method in subclass if you want to post or put so
+    protected UrlEncodedFormEntity getUploadContent() throws  Exception{
+        Log.e("Tag", "Don't forget to override this method");
+        return null;
     }
 
 }
