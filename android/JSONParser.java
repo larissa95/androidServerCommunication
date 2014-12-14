@@ -99,31 +99,13 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
         UrlEncodedFormEntity entity = getUploadContent();
+         entity = getUploadContent();
         if(entity != null) {
             post.setEntity(entity);
         }
-
-        //other idea hand JSON within url[2] for this information, e.g jsonString, see last idea
-        //alternative, post whole dictionary at once
-        // also very interesting: Gson Java library (can convert Java Objects into their JSON representation or jsonString ot an equivalent Java object.
-        //String json = new GsonBuilder().create().toJson(comment, Map.class);
-        
-        //another option:
-        /*try{
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("name", "test");
-            jsonObject.put("lastName", "Wabu");
-            Log.d("LogsLari", "hi" + jsonObject.toString());
-            StringEntity stringEntity = new StringEntity(jsonObject.toString(),"UTF-8");
-            stringEntity.setContentType("application/json");
-            post.setEntity(stringEntity);
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-         */
-
-
+        //other idea
+        //StringEntity jsonEntity = getUploadContentJSON();
+        //post.setEntity(jsonEntity);
         return client.execute(post);
     }
 
@@ -137,6 +119,36 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
         Log.e("Tag", "Don't forget to override this method");
         return null;
     }
+    
+    //Override this method in subclass if you want to post or put so, other option
+    //easier to do, if you're working with JSON Objects
+    protected StringEntity getUploadContentJSON() throws Exception{
+        Log.e("Tag", "Don't forget to override this method");
+        //other idea hand JSON within url[2] for this information, e.g jsonString, see last idea
+        //alternative, post whole dictionary at once
+        // also very interesting: Gson Java library (can convert Java Objects into their JSON representation or jsonString ot an equivalent Java object.
+        //String json = new GsonBuilder().create().toJson(comment, Map.class);
+        
+        //another option:
+        /*try{
+         JSONObject jsonObject = new JSONObject();
+         jsonObject.put("name", "test");
+         jsonObject.put("lastName", "Wabu");
+         Log.d("LogsLari", "hi" + jsonObject.toString());
+         StringEntity stringEntity = new StringEntity(jsonObject.toString(),"UTF-8");
+         stringEntity.setContentType("application/json");
+         
+         
+         }catch(Exception e){
+         e.printStackTrace();
+         }
+         //return stringEntity;
+         */
+        return null;
+    }
+
+    
+    
 
 }
 
