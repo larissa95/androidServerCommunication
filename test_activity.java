@@ -100,6 +100,23 @@ public class test_activity extends ActionBarActivity {
         String transfer3[] = {"http://169.254.197.239:5000/test/put/st?number=23","PUT"};
         jsonParser3.execute(transfer3);
 
+
+        //example for Get
+        JSONParser jsonParser4 = new JSONParser() {
+            @Override
+            public void onJSONLoaded(JSONObject jObj) {
+
+                Log.d("LogsLar", jObj.toString());
+            }
+
+            @Override
+            public void JSONNotLoaded() {
+
+            }
+        };
+
+        String transfer4[] = {"http://169.254.197.239:5000/test/get","GET"};
+        jsonParser4.execute(transfer4);
     }
 
 

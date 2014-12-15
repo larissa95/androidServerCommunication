@@ -84,7 +84,7 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
             //JSONObject is an unordered collection of name/value pairs
             jObj= new JSONObject(json); // if you get a JSONArray use: jObj= new JSONArray(json);
         } catch (Exception e) {
-            Log.e("LogLari", "Error creating JSON, try  jObj= new JSONObject(json);" + e.toString());
+            Log.e("LogLari", "Error creating JSON, try  jObj= new JSONArray(json);" + e.toString());
             return null;
         }
         return jObj;
@@ -179,7 +179,8 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
     }
     //Override in subclass if you want to add headers
     protected Header[] addHeader(){
-       return null;
+        Log.e("Tag", "Don't forget to override this method if you want to use headers");
+        return null;
     }
 
 
