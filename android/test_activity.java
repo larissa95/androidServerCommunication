@@ -69,7 +69,21 @@ public class test_activity extends ActionBarActivity {
         jsonParser2.execute(transfer1);
 
 
-//        http://169.254.197.239:5000/test/put/st
+        //example for put
+        JSONParser jsonParser3 = new JSONParser() {
+            @Override
+            public void onJSONLoaded(JSONObject jObj) {
+
+                Log.d("LogsLar", jObj.toString());
+            }
+
+            @Override
+            public void JSONNotLoaded() {
+
+            }
+        };
+        String transfer3[] = {"http://169.254.197.239:5000/test/put/st","PUT"};
+        jsonParser3.execute(transfer3);
 
     }
 

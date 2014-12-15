@@ -12,6 +12,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -58,7 +59,7 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
             }else if(transfer[1].equals("POST")){
             httpResponse = POSTResponse(transfer[0]);
             }else if(transfer[1].equals("PUT")){
-                Log.d("LogLari","TODO");
+            httpResponse = PUTResponse(transfer[0]);
             }else if(transfer[1].equals("DELETE")){
             httpResponse = DELETEResponse(transfer[0]);
             }
@@ -114,7 +115,19 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
         DefaultHttpClient httpClient = new DefaultHttpClient();
         return httpClient.execute(httpDelete);
     }
-    //Override this method in subclass if you want to post or put so
+
+    private HttpResponse PUTResponse(String url) throws Exception {
+        HttpPut httpPut = new HttpPut(url);
+        DefaultHttpClient httpClient = new DefaultHttpClient();
+        UrlEncodedFormEntity entity = getUploadContent();
+        entity = getUploadContent();
+        if(entity != null) {
+            httpPut.setEntity(entity);
+        }
+        return httpClient.execute(httpPut);
+    }
+
+        //Override this method in subclass if you want to post or put so
     protected UrlEncodedFormEntity getUploadContent() throws  Exception{
         Log.e("Tag", "Don't forget to override this method");
         return null;
