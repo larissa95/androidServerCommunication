@@ -94,7 +94,12 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
         //for GET Methods
         HttpGet httpGet = new HttpGet(url);
         //utf-8 important for umlaute
-        httpGet.setHeader("Content-Type", "text/html; charset=utf-8");
+        //httpGet.setHeader("Content-Type", "text/html; charset=utf-8"); => set this code in your mainActivity
+        if(addHeader() != null) {
+            for (Header header : addHeader()) {
+                httpGet.setHeader(header);
+            }
+        }
         DefaultHttpClient httpClient = new DefaultHttpClient();
         return httpClient.execute(httpGet);
     }
@@ -102,6 +107,11 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
     private HttpResponse POSTResponse(String url) throws Exception{
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
+        if(addHeader() != null) {
+            for (Header header : addHeader()) {
+                post.setHeader(header);
+            }
+        }
         UrlEncodedFormEntity entity = getUploadContent();
          entity = getUploadContent();
         if(entity != null) {
