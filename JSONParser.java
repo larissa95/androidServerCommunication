@@ -118,6 +118,7 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
 
     private HttpResponse PUTResponse(String url) throws Exception {
         HttpPut httpPut = new HttpPut(url);
+        //httpPut.setHeader("test", "Set headers here");
         DefaultHttpClient httpClient = new DefaultHttpClient();
         UrlEncodedFormEntity entity = getUploadContent();
         entity = getUploadContent();

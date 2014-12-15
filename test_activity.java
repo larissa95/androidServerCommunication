@@ -81,8 +81,14 @@ public class test_activity extends ActionBarActivity {
             public void JSONNotLoaded() {
 
             }
+
+            protected UrlEncodedFormEntity getUploadContent() throws Exception{
+                List<NameValuePair> postContent= new ArrayList<NameValuePair>();
+                postContent.add(new BasicNameValuePair("name", "BumBum"));
+                return new UrlEncodedFormEntity(postContent);
+            }
         };
-        String transfer3[] = {"http://169.254.197.239:5000/test/put/st","PUT"};
+        String transfer3[] = {"http://169.254.197.239:5000/test/put/st?number=23","PUT"};
         jsonParser3.execute(transfer3);
 
     }
