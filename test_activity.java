@@ -6,8 +6,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.apache.http.Header;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -86,6 +88,13 @@ public class test_activity extends ActionBarActivity {
                 List<NameValuePair> postContent= new ArrayList<NameValuePair>();
                 postContent.add(new BasicNameValuePair("name", "BumBum"));
                 return new UrlEncodedFormEntity(postContent);
+            }
+            protected Header[] addHeader(){
+                Header[] headers = {
+                        new BasicHeader("test", "Set your headers here")
+                        ,new BasicHeader("Content-type", "Set e.g your content type here")
+                };
+                return headers;
             }
         };
         String transfer3[] = {"http://169.254.197.239:5000/test/put/st?number=23","PUT"};

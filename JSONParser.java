@@ -2,8 +2,10 @@ package project.server;
 
 import android.content.Entity;
 import android.os.AsyncTask;
+import android.preference.PreferenceActivity;
 import android.util.Log;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -15,6 +17,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
@@ -118,7 +121,11 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
 
     private HttpResponse PUTResponse(String url) throws Exception {
         HttpPut httpPut = new HttpPut(url);
-        //httpPut.setHeader("test", "Set headers here");
+        if(addHeader() != null) {
+            for (Header header : addHeader()) {
+                httpPut.setHeader(header);
+            }
+        }
         DefaultHttpClient httpClient = new DefaultHttpClient();
         UrlEncodedFormEntity entity = getUploadContent();
         entity = getUploadContent();
@@ -160,6 +167,12 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
          */
         return null;
     }
+    //Override in subclass if you want to add headers
+    protected Header[] addHeader(){
+       return null;
+    }
+
+
 
     
     
