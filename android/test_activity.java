@@ -26,11 +26,10 @@ public class test_activity extends ActionBarActivity {
             JSONParser json = new JSONParser() {
             @Override
             public void onJSONLoaded(JSONObject jObj) {
-            Log.d("LogsLar", jObj.toString());
+            Log.d("LogsLar", "called"+jObj.toString());
                 try {
                     //to get the values for keys
-                   // Log.d("LogsLar", jObj.getString("get"));
-                   // Log.d("LogsLar", jObj.getString("hi"));
+                    Log.d("LogsLar", jObj.getString("lastName"));
                 }catch(Exception e){
 
                 }
@@ -43,8 +42,8 @@ public class test_activity extends ActionBarActivity {
             //only override if POST oder PUT
             protected UrlEncodedFormEntity getUploadContent() throws Exception{
                 List<NameValuePair> postContent= new ArrayList<NameValuePair>();
-                postContent.add(new BasicNameValuePair("lastName", "Quappi"));
-                postContent.add(new BasicNameValuePair("name", "test"));
+                postContent.add(new BasicNameValuePair("lastName", "Mampf"));
+               // postContent.add(new BasicNameValuePair("name", "Franz"));
                 return new UrlEncodedFormEntity(postContent);
             }
         };
@@ -69,6 +68,8 @@ public class test_activity extends ActionBarActivity {
         String transfer1[] = {"http://169.254.197.239:5000/test/delete","DELETE"};
         jsonParser2.execute(transfer1);
 
+
+//        http://169.254.197.239:5000/test/put/st
 
     }
 
