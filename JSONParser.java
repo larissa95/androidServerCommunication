@@ -150,7 +150,8 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
         Log.e("Tag", "Don't forget to override this method");
         return null;
     }
-    
+
+
     //Override this method in subclass if you want to post or put so, other option
     //easier to do, if you're working with JSON Objects
     protected StringEntity getUploadContentJSON() throws Exception{
@@ -168,8 +169,7 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
          Log.d("LogsLari", "hi" + jsonObject.toString());
          StringEntity stringEntity = new StringEntity(jsonObject.toString(),"UTF-8");
          stringEntity.setContentType("application/json");
-         
-         
+
          }catch(Exception e){
          e.printStackTrace();
          }
@@ -177,6 +177,8 @@ public abstract class JSONParser extends AsyncTask<String, Void, JSONObject> {
          */
         return null;
     }
+
+
     //Override in subclass if you want to add headers
     protected Header[] addHeader(){
         Log.e("Tag", "Don't forget to override this method if you want to use headers");
